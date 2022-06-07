@@ -26,12 +26,12 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="name">Nama</label>
-                        <input type="text" class="form-control" id="name" name="name" value="<?= set_value('name');  ?>" placeholder="Masukkan nama">
+                        <input type="text" class="form-control <?= (form_error('name')) ? 'is-invalid' : '' ?>" id="name" name="name" value="<?= set_value('name');  ?>" placeholder="Masukkan nama">
                         <?php echo form_error('name'); ?>
                     </div>
                     <div class="form-group">
                         <label for="email">Alamat Email</label>
-                        <input type="email" class="form-control" id="email" name="email" value="<?= set_value('email');  ?>" placeholder="Masukkan email">
+                        <input type="email" class="form-control <?= (form_error('email')) ? 'is-invalid' : '' ?>" id="email" name="email" value="<?= set_value('email');  ?>" placeholder="Masukkan email">
                         <?php echo form_error('email'); ?>
                     </div>
                     <h4>Kode Bank</h4>

@@ -52,7 +52,7 @@ class Pic extends CI_Controller
             array(
                 'field' => 'email',
                 'label' => 'Email',
-                // 'rules' => 'required',
+                'rules' => 'required',
             ),
             array(
                 'field' => 'abbr',

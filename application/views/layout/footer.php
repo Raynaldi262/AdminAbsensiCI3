@@ -18,7 +18,6 @@
 <script src="<?php echo base_url(); ?>assets/dist/js/adminlte.js"></script>
 <!-- <script src="<?php echo base_url(); ?>assets/plugins/chart.js/Chart.min.js"></script> -->
 <!-- <script src="<?php echo base_url(); ?>assets/dist/js/pages/dashboard3.js"></script> -->
-<script src="<?php echo base_url(); ?>assets/dist/js/demo.js"></script>
 <script src="<?php echo base_url(); ?>assets/plugins/jszip/jszip.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/plugins/pdfmake/pdfmake.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/plugins/pdfmake/vfs_fonts.js"></script>
