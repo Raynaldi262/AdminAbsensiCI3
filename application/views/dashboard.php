@@ -1,4 +1,6 @@
   <!-- Content Wrapper. Contains page content -->
+  
+<div class="breadcrumb" id="dashboard"></div>
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">

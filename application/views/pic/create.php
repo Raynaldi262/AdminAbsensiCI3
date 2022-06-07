@@ -2,14 +2,37 @@
     .error {
         color: red;
     }
+    .select2-selection {
+        -webkit-box-shadow: 0;
+        box-shadow: 0;
+        background-color: #fff;
+        border: 0;
+        border-radius: 0;
+        color: #555555;
+        font-size: 14px;
+        outline: 0;
+        min-height: 40px;
+        text-align: left;
+    }
+    
+    .select2-selection__rendered {
+        margin: 10px;
+        margin-left: -10px;
+    }
+
+    .select2-selection__arrow {
+        margin: 10px;
+    }
+    
 </style>
+<div class="breadcrumb" id="tambah_pic"></div>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Add PIC</h1>
+                    <h1>Tambah PIC</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -19,8 +42,9 @@
         <div class="container-fluid">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Quick Example</h3>
+                    <h3 class="card-title">Form Pendaftaran PIC baru</h3>
                 </div>
+                <div class="sweeatAlert" id="<?= $status; ?>"></div>
                 <?php $hidden = array('created_at' => time(), 'modified_at' => time(), 'flag' => 1); ?>
                 <?php echo form_open('pic/store', '', $hidden); ?>
                 <div class="card-body">
@@ -34,18 +58,17 @@
                         <input type="email" class="form-control <?= (form_error('email')) ? 'is-invalid' : '' ?>" id="email" name="email" value="<?= set_value('email');  ?>" placeholder="Masukkan email">
                         <?php echo form_error('email'); ?>
                     </div>
-                    <h4>Kode Bank</h4>
                     <div class="form-group">
-                        <select class="custom-select form-control-border" id="abbr" name="abbr" value="<?= set_value('abbr');  ?>">
+                        <label for="abbr">Kode Bank</label>
+                        <select class="custom-select form-control-border selectAbbr" id="abbr" name="abbr" value="<?= set_value('abbr');  ?>">
                             <?php foreach ($banks as $bank) : ?>
                                 <option value="<?= $bank->initial ?>"><?= $bank->initial ?></option>
                             <?php endforeach; ?>
-                            <?php echo form_error('abbr'); ?>
                         </select>
+                        <?php echo form_error('abbr'); ?>
                     </div>
                 </div>
                 <!-- /.card-body -->
-
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
@@ -58,9 +81,30 @@
 
 <script>
     $(document).ready(function() {
-        Swal.fire({
-            icon: 'success',
-            title: 'Signed in successfully'
-        })
+        $('.selectAbbr').select2({
+            placeholder: "Silahkan Pilih",
+            width: '100%'
+        });
+        
+        let status = $('.sweeatAlert').attr('id'); 
+
+        if(status === 'success'){
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Data PIC berhasil ditambahkan",
+                showConfirmButton: false,
+                timer: 1500,
+            });
+        }else if(status === 'error'){
+            Swal.fire({
+                position: "center",
+                icon: "error",
+                title: "Data PIC gagal ditambahkan",
+                showConfirmButton: false,
+                timer: 1500,
+            });
+        }
+        
     });
 </script>

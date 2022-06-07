@@ -1,3 +1,8 @@
+<style>
+  .breadcrumb{
+    margin-top: -3%;
+  }
+</style>
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
   <a href="index3.html" class="brand-link">
@@ -13,7 +18,7 @@
         <img src="<?php echo base_url() ?>/assets/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
-        <a href="#" class="d-block">Alexander Pierce</a>
+        <a href="#" class="d-block">Bambang</a>
       </div>
     </div>
 
@@ -23,7 +28,7 @@
         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
         <li class="nav-item menu-open">
-          <a href="#" class="nav-link active">
+          <a href="<?= base_url() . "dashboard/index"; ?>" class="nav-link" id="dashboard">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
               Dashboard
@@ -31,7 +36,7 @@
           </a>
         </li>
         <li class="nav-item menu-open">
-          <a href="#" class="nav-link">
+          <a href="#" class="nav-link" id="pic">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
               PIC
@@ -39,16 +44,22 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="<?php echo base_url() ?>pic/insert" class="nav-link">
+            <li class="nav-item" id="pic">
+              <a href="<?php echo base_url() ?>pic/index" class="nav-link" id="daftar_pic" >
                 <i class="far fa-circle nav-icon"></i>
-                <p>Add PIC</p>
+                <p>Daftar PIC</p>
+              </a>
+            </li>
+            <li class="nav-item" id="pic">
+              <a href="<?php echo base_url() ?>pic/insert" class="nav-link" id="tambah_pic">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Tambahkan PIC</p>
               </a>
             </li>
           </ul>
         </li>
         <li class="nav-item menu-open">
-          <a href="#" class="nav-link">
+          <a href="#" class="nav-link" id="email">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
               Email
@@ -61,3 +72,14 @@
   </div>
   <!-- /.sidebar -->
 </aside>
+<script>
+  $(document).ready(function() {
+    let active = $('.breadcrumb').attr('id');
+
+    $(".nav-link").removeClass("active"); 
+    let a = $(".nav-link#" + active).addClass('active'); 
+
+    let x = $(a).parent().attr('id');
+    $('#'+ x).addClass('active');  
+  });
+</script>

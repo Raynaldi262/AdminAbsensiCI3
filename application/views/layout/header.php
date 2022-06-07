@@ -25,7 +25,10 @@
   <!-- Daterange picker -->
   <link rel="stylesheet" href=" <?php echo base_url() ?>assets/plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
-  <link rel="stylesheet" href=" <?php echo base_url() ?>assets/plugins/summernote/summernote-bs4.min.css">
+  <link rel="stylesheet" href=" <?php echo base_url() ?>assets/plugins/summernote/summernote-bs4.min.css"> 
+  
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  
   <script src="<?php echo base_url(); ?>assets/plugins/jquery/jquery.min.js"></script>
   <script src="<?php echo base_url(); ?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
   <script src="<?php echo base_url(); ?>assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -36,8 +39,6 @@
   <script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
   <script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
   <script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-
-
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">

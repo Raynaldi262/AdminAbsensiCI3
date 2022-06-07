@@ -15,7 +15,7 @@ class Pic extends CI_Controller
     public function index()
     {
         $this->load->view('layout/header');
-        $this->load->view('layout/, $datanavbar');
+        $this->load->view('layout/navbar');
         $this->load->view('layout/sidebar');
         $this->load->view('pic/index');
         $this->load->view('layout/footer');
@@ -23,15 +23,7 @@ class Pic extends CI_Controller
 
     public function insert()
     {
-        $status = $this->uri->segment(3);
-        if (!empty($status) && $status === 'success') {
-            $data['status'] = "Data PIC berhasil ditambahkan";
-        } else if (!empty($status) && $status === 'error') {
-            $data['status'] = "Data tidak dapat ditambahkan (Error)";
-        } else {
-            $data['status'] = 'normal';
-        }
-
+        $data['status'] = $this->uri->segment(3);  
         $data['banks'] = $this->bank_model->get_all_bankcode();
 
         $this->load->view('layout/header');
@@ -65,8 +57,7 @@ class Pic extends CI_Controller
 
         if ($this->form_validation->run() == TRUE) {
             $id = $this->pic_model->insert_pic();
-            if ($id) {
-                $this->pic_model->insert_pic();
+            if ($id) { 
                 redirect(base_url() . 'pic/insert/success');
             } else {
                 log_message('error', $this->db->error());
