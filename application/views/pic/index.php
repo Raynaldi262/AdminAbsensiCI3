@@ -267,8 +267,9 @@
               timer: 1500,
             });
 
-            window.location.reload();
-
+            setTimeout(function(){
+              window.location.reload(1);
+            }, 1500);
           }
 
         },
