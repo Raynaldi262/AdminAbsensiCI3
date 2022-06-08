@@ -2,28 +2,6 @@
     .error {
         color: red;
     }
-    .select2-selection {
-        -webkit-box-shadow: 0;
-        box-shadow: 0;
-        background-color: #fff;
-        border: 0;
-        border-radius: 0;
-        color: #555555;
-        font-size: 14px;
-        outline: 0;
-        min-height: 40px;
-        text-align: left;
-    }
-    
-    .select2-selection__rendered {
-        margin: 10px;
-        margin-left: -10px;
-    }
-
-    .select2-selection__arrow {
-        margin: 10px;
-    }
-    
 </style>
 <div class="breadcrumb" id="tambah_pic"></div>
 <div class="content-wrapper">
@@ -60,12 +38,11 @@
                     </div>
                     <div class="form-group">
                         <label for="abbr">Kode Bank</label>
-                        <select class="custom-select form-control-border selectAbbr" id="abbr" name="abbr" value="<?= set_value('abbr');  ?>">
+                        <select class="custom-select form-control-border selectAbbr" id="abbr" name="abbr">
                             <?php foreach ($banks as $bank) : ?>
                                 <option value="<?= $bank->initial ?>"><?= $bank->initial ?></option>
                             <?php endforeach; ?>
                         </select>
-                        <?php echo form_error('abbr'); ?>
                     </div>
                 </div>
                 <!-- /.card-body -->
@@ -85,10 +62,10 @@
             placeholder: "Silahkan Pilih",
             width: '100%'
         });
-        
-        let status = $('.sweeatAlert').attr('id'); 
 
-        if(status === 'success'){
+        let status = $('.sweeatAlert').attr('id');
+
+        if (status === 'success') {
             Swal.fire({
                 position: "center",
                 icon: "success",
@@ -96,7 +73,7 @@
                 showConfirmButton: false,
                 timer: 1500,
             });
-        }else if(status === 'error'){
+        } else if (status === 'error') {
             Swal.fire({
                 position: "center",
                 icon: "error",
@@ -105,6 +82,6 @@
                 timer: 1500,
             });
         }
-        
+
     });
 </script>

@@ -14,16 +14,19 @@ class Pic extends CI_Controller
 
     public function index()
     {
+        $data['banks'] = $this->bank_model->get_all_bankcode();
+        $data['pics'] = $this->pic_model->get_pic_limited(50);
+
         $this->load->view('layout/header');
         $this->load->view('layout/navbar');
         $this->load->view('layout/sidebar');
-        $this->load->view('pic/index');
+        $this->load->view('pic/index', $data);
         $this->load->view('layout/footer');
     }
 
     public function insert()
     {
-        $data['status'] = $this->uri->segment(3);  
+        $data['status'] = $this->uri->segment(3);
         $data['banks'] = $this->bank_model->get_all_bankcode();
 
         $this->load->view('layout/header');
@@ -46,33 +49,62 @@ class Pic extends CI_Controller
                 'label' => 'Email',
                 'rules' => 'required',
             ),
-            array(
-                'field' => 'abbr',
-                'label' => 'Kode Bank',
-                'rules' => 'required'
-            ),
         );
 
         $this->form_validation->set_rules($config);
 
         if ($this->form_validation->run() == TRUE) {
             $id = $this->pic_model->insert_pic();
-            if ($id) { 
+            if ($id) {
                 redirect(base_url() . 'pic/insert/success');
             } else {
                 log_message('error', $this->db->error());
                 redirect(base_url() . 'pic/insert/error');
             }
-
-            // try {
-            //     $this->pic_model->insert_pic();
-            //     redirect(base_url() . 'pic/insert/success');
-            // } catch (Exception $e) {
-            //     log_message('error', $this->db->error());
-            //     redirect(base_url() . 'pic/insert/error');
-            // }
         } else {
             $this->insert();    // klo gak lulus validasi
+        }
+    }
+
+    public function show()
+    {
+        if ($this->input->is_ajax_request()) {
+            $pic = $this->pic_model->get_pic_detail();
+            echo json_encode($pic);
+        }
+    }
+
+    public function update()
+    {
+        if ($this->input->is_ajax_request()) {
+            $config = array(
+                array(
+                    'field' => 'name',
+                    'label' => 'Username',
+                    'rules' => 'required'
+                ),
+                array(
+                    'field' => 'email',
+                    'label' => 'Email',
+                    'rules' => 'required',
+                ),
+            );
+
+            $this->form_validation->set_rules($config);
+
+            $msg = [];
+
+            if ($this->form_validation->run() == TRUE) {
+                $this->pic_model->update_pic();
+            } else {
+                $msg = [
+                    'error' => [
+                        'name' => form_error('name'),
+                        'email' => form_error('email')
+                    ]
+                ];
+            }
+            echo json_encode($msg);
         }
     }
 }
