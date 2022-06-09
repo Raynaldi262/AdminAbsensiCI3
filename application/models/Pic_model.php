@@ -1,10 +1,19 @@
 <?php
 class Pic_model extends CI_Model
 {
-
     public function get_all_pic(): array
     {
         $query = $this->db->get('pics');
+        return $query->result();
+    }
+
+    public function get_all_active_pic_email(): array
+    {
+        $this->db->select('name, email');
+        $this->db->from('pics');
+        $this->db->where('flag', '1');
+        $query = $this->db->get();
+
         return $query->result();
     }
 
