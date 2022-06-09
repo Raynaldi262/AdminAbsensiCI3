@@ -78,4 +78,24 @@ class Pic_model extends CI_Model
         $this->db->where('id', $this->input->post('id'));
         $this->db->update('pics', $data);
     }
+
+    public function insert_pic_loop(): int
+    {
+
+        for($i=0;$i<100;$i++){
+
+            $data = array(
+                'name' =>  "tes $i",
+                'email' => "tes$i@mantap.com",
+                'bank_code' =>  'BCA',
+                'flag' =>  1,
+                'created_at' => time(),
+                'modified_at' =>  time(),
+            );
+    
+            $this->db->insert('pics', $data);
+        }
+
+        return 1;
+    }
 }

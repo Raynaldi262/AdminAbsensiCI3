@@ -38,10 +38,11 @@
               <div class="form-group">
                 <div class="btn btn-default btn-file">
                   <i class="fas fa-paperclip"></i> Attachment
-                  <input type="file" id="attachment1" name="attachment">
+                  <input type="file" id="attachment1" name="attachment" onChange='getFileNameWithExt(event)'>
+                  <span id="outputFile" style="color: red;"></span> 
                 </div>
                 <p class="help-block">Max. 32MB</p>
-              </div>
+              </div> 
             </div>
             <!-- /.card-body -->
             <div class="card-footer">
@@ -62,6 +63,22 @@
   <!-- /.content -->
 </div>
 <script>
+
+  function getFileNameWithExt(event) {
+    if (!event || !event.target || !event.target.files || event.target.files.length === 0) {
+      return;
+    }
+
+    const name = event.target.files[0].name;
+    const lastDot = name.lastIndexOf('.');
+
+    const fileName = name.substring(0, lastDot);
+    const ext = name.substring(lastDot + 1);
+
+    $('#outputFile').html(`<b><u><i>${fileName}.${ext}<i></u></b>`);
+
+  }
+
   $('#sendemail1').submit(function(e) {
     e.preventDefault()
      $.ajax({
@@ -90,6 +107,7 @@
                     $('#subject1').val('')
                     $('#compose-textarea').val('')
                     $('#attachment1').val('')
+                    $('#outputFile').html('');
               }
           },
           error: function(xhr, ajaxOptions, thrownError) {
