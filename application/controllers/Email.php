@@ -25,13 +25,14 @@ class Email extends CI_Controller
 
     public function sendmail()
     {
+        try {
         $mail = $this->phpmail->load();
         $mail->clearAddresses();
         $mail->clearAttachments();
         $mail->isSMTP();                //Sets Mailer to send message using SMTP
         $mail->Host = 'mail.primacom.co.id';    //Sets the SMTP hosts of your Email hosting, this for Godaddy
-        $mail->Port = '25';                //Sets the default SMTP server port
-        $mail->SMTPAuth = true;              //Sets SMTP authentication. Utilizes the Username and Password variables
+        $mail->Port = 25;                //Sets the default SMTP server port
+        $mail->SMTPAuth = false;              //Sets SMTP authentication. Utilizes the Username and Password variables
         $mail->Username = '';          //Sets SMTP username
         $mail->Password = '';          //Sets SMTP password
         $mail->SMTPSecure = 'tls';              //Sets connection prefix. Options are "", "ssl" or "tls"
@@ -45,5 +46,8 @@ class Email extends CI_Controller
         // $string = $ci->load->view('email/orderSucces', $data, true);
         // $mail->Body = $string;
         return $mail->send();
+        }catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
     }
 }

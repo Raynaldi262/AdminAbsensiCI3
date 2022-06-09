@@ -13,12 +13,10 @@ class PHPMail
 
     public function load()
     {
-
-        require_once 'vendor/phpmailer/src/PHPMailer.php';
-        require_once 'vendor/phpmailer/src/SMTP.php';
-        require_once 'vendor/phpmailer/src/Exception.php';
-
-        $mail = new PHPMail;
+        require_once 'vendor/phpmailer/phpmailer/src/PHPMailer.php';
+        require_once 'vendor/phpmailer/phpmailer/src/Exception.php';
+        require_once 'vendor/phpmailer/phpmailer/src/SMTP.php';
+        $mail = new PHPMailer;
         return $mail;
     }
 }
