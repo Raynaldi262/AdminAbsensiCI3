@@ -28,9 +28,9 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <?php echo form_open_multipart('email/sendmail'); ?>
+              <?php echo form_open_multipart('email/sendmail', array('id' => 'sendemail1')); ?>
               <div class="form-group">
-                <input type="text" name="subject" class="form-control" placeholder="Subject:">
+                <input type="text" id="subject1" name="subject" class="form-control" placeholder="Subject:">
               </div>
               <div class="form-group">
                 <textarea id="compose-textarea" name="body" class="form-control" style="height: 300px"></textarea>
@@ -38,7 +38,7 @@
               <div class="form-group">
                 <div class="btn btn-default btn-file">
                   <i class="fas fa-paperclip"></i> Attachment
-                  <input type="file" name="attachment">
+                  <input type="file" id="attachment1" name="attachment">
                 </div>
                 <p class="help-block">Max. 32MB</p>
               </div>
@@ -61,3 +61,40 @@
   </section>
   <!-- /.content -->
 </div>
+<script>
+  $('#sendemail1').submit(function(e) {
+    e.preventDefault()
+     $.ajax({
+          type: "POST",
+          data: new FormData(this),
+          url: "<?php echo base_url("email/sendmail"); ?>",
+          dataType: "json",
+          contentType: false,
+          cache: false,
+          processData: false,
+          success: function(result) {
+              if(result.error){
+                Swal.fire({
+                        position: "center",
+                        icon: "error",
+                        title: result.error,
+                        showConfirmButton: true,
+                    });
+              }else{
+                Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: result.sukses,
+                        showConfirmButton: true,
+                    });
+                    $('#subject1').val('')
+                    $('#compose-textarea').val('')
+                    $('#attachment1').val('')
+              }
+          },
+          error: function(xhr, ajaxOptions, thrownError) {
+            alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+          }
+        })
+  })
+</script>
