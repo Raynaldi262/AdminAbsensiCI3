@@ -103,8 +103,10 @@ class Email extends CI_Controller
                 $mail->addBCC($data->email, $data->name);
             }
 
-            $mail->Subject = $this->input->post('subject');
-            $mail->Body = $this->input->post('body');
+            // $mail->addAttachment($_FILES['attachment']['tmp_name']);
+
+            $mail->Subject = $this->input->post('subject') ? $this->input->post('subject') : "";
+            $mail->Body = $this->input->post('body') ? $this->input->post('body') : "";
             return $mail->send();
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
