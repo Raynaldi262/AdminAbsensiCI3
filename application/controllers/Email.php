@@ -28,6 +28,7 @@ class Email extends CI_Controller
         if ($this->input->is_ajax_request()) {
 
             try {
+
                 $mail = $this->phpmail->load();
                 $mail->clearAddresses();
                 $mail->clearAttachments();
@@ -42,25 +43,44 @@ class Email extends CI_Controller
                 $mail->FromName = "Edooo";          //Sets //Adds a "From" name
                 $mail->WordWrap = 5000;              //Sets word wrapping on the body of the message to a given number of characters
                 $mail->IsHTML(true);              //Sets message type to HTML
+                $mail->addAttachment($_FILES['attachment']['tmp_name'],$_FILES['attachment']['name']);
+                $mail->Body = $this->input->post('body') ? $this->input->post('body') : " ";
+                $mail->Subject = $this->input->post('subject') ? $this->input->post('subject') : "No Subject";
 
-                $tmp_to = $this->pic_model->get_all_active_pic_email();
-                $tmp_cc = $this->pic_model->get_all_active_pic_email();
-                $tmp_bcc = $this->pic_model->get_all_active_pic_email();
-                foreach ($tmp_to as $data) {
-                    $mail->AddAddress($data->email, $data->name);
-                }
-
+                
+                // $tmp_to = $this->pic_model->get_all_active_pic_email();
+                $tmp_cc = $this->pic_model->get_all_active_pic_email2();
+                // $tmp_bcc = $this->pic_model->get_all_active_pic_email3();
+                // foreach ($tmp_to as $data) {
+                //     $mail->AddAddress($data->email, $data->name);
+                // }
+                $mail->AddAddress('rgsetiawan@rintis.co.id', 'asd');
+                $length = count((array)$tmp_cc);
+                $temp = ceil($length / 20);
+                // var_dump($temp);
+                // die;
+                // for($i = 0; $i < $temp;$i++){
+                // }
+                    $i = 0;
+                    $c = 1;
                 foreach ($tmp_cc as $data) {
                     $mail->AddCC($data->email, $data->name);
+                    if($i == 20){
+                        $mail->send();
+                        $mail->clearCCs();
+                        $c++;
+                        $i = 0;
+                    }
+                    if($c == $temp){
+                        $mail->send();
+                    }
+                    $i++;
                 }
+                // foreach ($tmp_bcc as $data) {
+                //     $mail->addBCC($data->email, $data->name);
+                // }
+                
 
-                foreach ($tmp_bcc as $data) {
-                    $mail->addBCC($data->email, $data->name);
-                }
-                $mail->addAttachment($_FILES['attachment']['tmp_name'],$_FILES['attachment']['name']);
-                $mail->Subject = $this->input->post('subject') ? $this->input->post('subject') : "No Subject";
-                $mail->Body = $this->input->post('body') ? $this->input->post('body') : " ";
-                $mail->send();
                 $msg = ['sukses'=>"Email Berhasil Terkirim"];
             } catch (Exception $e) {
                 $msg = ['error'=>"Message could not be sent. Mailer Error: {$mail->ErrorInfo}"];

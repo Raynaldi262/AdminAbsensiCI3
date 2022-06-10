@@ -9,9 +9,35 @@ class Pic_model extends CI_Model
 
     public function get_all_active_pic_email(): array
     {
+        //abc , bca, cba
         $this->db->select('name, email');
         $this->db->from('pics');
         $this->db->where('flag', '1');
+        $this->db->where('bank_code', 'ABC');
+        $query = $this->db->get();
+
+        return $query->result();
+    }
+
+    public function get_all_active_pic_email2(): array
+    {
+        //abc , bca, cba
+        $this->db->select('name, email');
+        $this->db->from('pics');
+        $this->db->where('flag', '1');
+        $this->db->where('bank_code', 'BCA');
+        $query = $this->db->get();
+
+        return $query->result();
+    }
+
+    public function get_all_active_pic_email3(): array
+    {
+        //abc , bca, cba
+        $this->db->select('name, email');
+        $this->db->from('pics');
+        $this->db->where('flag', '1');
+        $this->db->where('bank_code', 'CBA');
         $query = $this->db->get();
 
         return $query->result();
@@ -87,7 +113,7 @@ class Pic_model extends CI_Model
             $data = array(
                 'name' =>  "tes $i",
                 'email' => "tes$i@mantap.com",
-                'bank_code' =>  'BCA',
+                'bank_code' =>  'CBA',
                 'flag' =>  1,
                 'created_at' => time(),
                 'modified_at' =>  time(),
