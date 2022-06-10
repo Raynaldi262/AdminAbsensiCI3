@@ -39,15 +39,15 @@
                 <div class="btn btn-default btn-file">
                   <i class="fas fa-paperclip"></i> Attachment
                   <input type="file" id="attachment1" name="attachment" onChange='getFileNameWithExt(event)'>
-                  <span id="outputFile" style="color: red;"></span> 
+                  <span id="outputFile" style="color: red;"></span>
                 </div>
                 <p class="help-block">Max. 32MB</p>
-              </div> 
+              </div>
             </div>
             <!-- /.card-body -->
             <div class="card-footer">
               <div class="float-right">
-                <button type="submit" class="btn btn-primary"><i class="far fa-envelope"></i> Send</button>
+                <button type="submit" class="btn btn-primary btnsend"><i class="far fa-envelope"></i> Send</button>
               </div>
             </div>
             </form>
@@ -63,7 +63,6 @@
   <!-- /.content -->
 </div>
 <script>
-
   function getFileNameWithExt(event) {
     if (!event || !event.target || !event.target.files || event.target.files.length === 0) {
       return;
@@ -81,38 +80,47 @@
 
   $('#sendemail1').submit(function(e) {
     e.preventDefault()
-     $.ajax({
-          type: "POST",
-          data: new FormData(this),
-          url: "<?php echo base_url("email/sendmail"); ?>",
-          dataType: "json",
-          contentType: false,
-          cache: false,
-          processData: false,
-          success: function(result) {
-              if(result.error){
-                Swal.fire({
-                        position: "center",
-                        icon: "error",
-                        title: result.error,
-                        showConfirmButton: true,
-                    });
-              }else{
-                Swal.fire({
-                        position: "center",
-                        icon: "success",
-                        title: result.sukses,
-                        showConfirmButton: true,
-                    });
-                    $('#subject1').val('')
-                    $('#compose-textarea').val('')
-                    $('#attachment1').val('')
-                    $('#outputFile').html('');
-              }
-          },
-          error: function(xhr, ajaxOptions, thrownError) {
-            alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
-          }
-        })
+    $.ajax({
+      type: "POST",
+      data: new FormData(this),
+      url: "<?php echo base_url("email/sendmail"); ?>",
+      dataType: "json",
+      contentType: false,
+      cache: false,
+      processData: false,
+      beforeSend: function() {
+        $('.btnsend').html('<i class="fa fa-spin fa-spinner">')
+        $('.btnsend').attr('type', 'button')
+      },
+      complete: function() {
+        $('.btnsend').html('Send')
+        $('.btnsend').attr('type', 'submit')
+
+      },
+      success: function(result) {
+        if (result.error) {
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: result.error,
+            showConfirmButton: true,
+          });
+        } else {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: result.sukses,
+            showConfirmButton: true,
+          });
+          $('#subject1').val('')
+          $('#compose-textarea').val('')
+          $('#attachment1').val('')
+          $('#outputFile').html('');
+        }
+      },
+      error: function(xhr, ajaxOptions, thrownError) {
+        alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+      }
+    })
   })
 </script>
