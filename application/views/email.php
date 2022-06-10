@@ -97,7 +97,7 @@
         $('.btnsend').attr('type', 'submit')
 
       },
-      success: function(result) {
+      success: function(result) { 
         if (result.error) {
           Swal.fire({
             position: "center",

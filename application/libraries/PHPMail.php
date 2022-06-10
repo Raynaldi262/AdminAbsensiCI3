@@ -16,6 +16,7 @@ class PHPMail
         require_once 'vendor/phpmailer/phpmailer/src/PHPMailer.php';
         require_once 'vendor/phpmailer/phpmailer/src/Exception.php';
         require_once 'vendor/phpmailer/phpmailer/src/SMTP.php';
+        // $mail = new PHPMailer(true);
         $mail = new PHPMailer;
         return $mail;
     }

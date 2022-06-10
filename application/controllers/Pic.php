@@ -54,7 +54,7 @@ class Pic extends CI_Controller
         $this->form_validation->set_rules($config);
 
         if ($this->form_validation->run() == TRUE) {
-            $id = $this->pic_model->insert_pic_loop();
+            $id = $this->pic_model->insert_pic();
             if ($id) {
                 redirect(base_url() . 'pic/insert/success');
             } else {
