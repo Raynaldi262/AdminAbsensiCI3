@@ -23,7 +23,7 @@
                     <h3 class="card-title">Form Pendaftaran PIC baru</h3>
                 </div>
                 <div class="sweeatAlert" id="<?= $status; ?>"></div>
-                <?php $hidden = array('created_at' => time(), 'modified_at' => time(), 'flag' => 1); ?>
+                <?php $hidden = array('created_at' => date('Y-m-d H:i:s'), 'modified_at' => date('Y-m-d H:i:s'), 'flag' => 1); ?>
                 <?php echo form_open('pic/store', '', $hidden); ?>
                 <div class="card-body">
                     <div class="form-group">

@@ -98,7 +98,7 @@ class Pic_model extends CI_Model
             'email' => $this->input->post('email'),
             'bank_code' => $this->input->post('abbr'),
             'flag' => $this->input->post('status'),
-            'modified_at' => $this->input->post('modified_at'),
+            'modified_at' => date('Y-m-d H:i:s'),
         );
 
         $this->db->where('id', $this->input->post('id'));

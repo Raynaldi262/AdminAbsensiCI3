@@ -91,7 +91,7 @@
                       <td><?php echo $pic->email ?></td>
                       <td><?php echo $pic->bank_code ?></td>
                       <td><?php echo $status = $pic->flag ? 'Active' : 'In-Active'; ?></td>
-                      <td><?php echo date("d-M-Y", $pic->created_at) ?></td>
+                      <td><?php echo  date("d-M-Y", strtotime($pic->created_at));?></td>
                       <td><button type="button" class="btn btn-primary detailPic" data-toggle="modal" data-target="#editModal" id="<?= $pic->id ?>">Ubah</button></td>
                     </tr>
                   <?php
@@ -125,8 +125,7 @@
           <?php $attributes = array('id' => 'editPIC'); ?>
 
           <?php echo form_open('pic/store', $attributes); ?>
-          <input type="hidden" name="id" id="id1">
-          <input type="hidden" name="modified_at" id="modified_at1">
+          <input type="hidden" name="id" id="id1"> 
           <div class="card-body">
             <div class="form-group">
               <label for="name">Nama</label>
@@ -222,8 +221,7 @@
       let name = $('#name1').val();
       let email = $('#email1').val();
       let abbr = $('#abbr1').val();
-      let status = $('#status1').val();
-      let modified_at = $('#modified_at').val();
+      let status = $('#status1').val(); 
 
       $.ajax({
         type: "POST",
@@ -232,8 +230,7 @@
           name,
           email,
           abbr,
-          status,
-          modified_at
+          status
         },
         url: "<?php echo base_url("pic/update"); ?>",
         dataType: "json",
