@@ -63,7 +63,7 @@
         </li>
         <li class="nav-item menu-open">
           <a href="#" class="nav-link" id="pic">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <i class="nav-icon fas fa fa-user-plus"></i>
             <p>
               PIC
               <i class="right fas fa-angle-left"></i>
@@ -86,7 +86,7 @@
         </li>
         <li class="nav-item menu-open">
           <a href="<?= base_url("email/index"); ?>" class="nav-link" id="email">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <i class="nav-icon fas fa-envelope"></i>
             <p>
               Email
             </p>
