@@ -38,16 +38,15 @@ class Email extends CI_Controller
                 $mail->Username = '';          //Sets SMTP username
                 $mail->Password = '';          //Sets SMTP password
                 $mail->SMTPSecure = 'tls';              //Sets connection prefix. Options are "", "ssl" or "tls"
-                $mail->From = 'ginataraldi01@gmail.com';      //Sets the From email address for the message
+                $mail->From = 'tleonardo@rintis.co.id';      //Sets the From email address for the message
                 $mail->FromName = "Edooo";          //Sets //Adds a "From" name
                 $mail->WordWrap = 5000;              //Sets word wrapping on the body of the message to a given number of characters
                 $mail->IsHTML(true);              //Sets message type to HTML
-                if(isset($_FILES['attachment'])){
+                if (isset($_FILES['attachment'])) {
                     $mail->addAttachment($_FILES['attachment']['tmp_name'], $_FILES['attachment']['name']);
                 }
                 $mail->Body = $this->input->post('body') ? $this->input->post('body') : " ";
                 $mail->Subject = $this->input->post('subject') ? $this->input->post('subject') : "No Subject";
-
 
                 // $tmp_to = $this->pic_model->get_all_active_pic_email();
                 // foreach ($tmp_to as $data) {
@@ -68,20 +67,18 @@ class Email extends CI_Controller
 
                 $i = 0; // flag email
                 $c = 1; // flag send
-                
-                // foreach ($tmp_bcc as $data) {
-                //     $mail->addBCC($data->email, $data->name);
-                //     if ($i == 20) {
-                //         $mail->send();
-                //         $mail->clearBCCs();
-                //         $c++;
-                //         $i = 0; 
-                //     }
-                //     $i++;
-                // }
-                $mail->AddAddress("ginantaraaldi1387@gmail.com");
-                $mail->addBCC("ginantaraaldi@gmail.com");
-                $mail->addBCC("rgsetiawan@rintis.co.id"); 
+
+                foreach ($tmp_bcc as $data) {
+                    $mail->addBCC($data->email, $data->name);
+                    if ($i == 20) {
+                        $mail->send();
+                        $mail->clearBCCs();
+                        $c++;
+                        $i = 0;
+                    }
+                    $i++;
+                }
+
                 $mail->send();
 
                 $msg = ['sukses' => "Email Berhasil Terkirim"];
