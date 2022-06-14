@@ -53,7 +53,8 @@ class Pic_model extends CI_Model
         if ($this->input->get('cari_bank')) {
             $this->db->where('bank_code', $this->input->get('cari_bank'));
         }
-        if ($this->input->get('cari_status')) {
+
+        if ($this->input->get('cari_status') != "") {
             $this->db->where('flag', $this->input->get('cari_status'));
         }
 
@@ -108,7 +109,7 @@ class Pic_model extends CI_Model
     public function insert_pic_loop(): int
     {
 
-        for($i=0;$i<100;$i++){
+        for ($i = 0; $i < 100; $i++) {
 
             $data = array(
                 'name' =>  "tes $i",
@@ -118,7 +119,7 @@ class Pic_model extends CI_Model
                 'created_at' => time(),
                 'modified_at' =>  time(),
             );
-    
+
             $this->db->insert('pics', $data);
         }
 

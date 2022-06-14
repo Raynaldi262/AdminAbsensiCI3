@@ -1,3 +1,7 @@
+<?php
+echo $js;
+?>
+
 <style>
   table {
     text-align: center;
@@ -39,10 +43,6 @@
                     <div class="form-group" style='margin-bottom: 0'>
                       <label for="cari_bank">Kode Bank</label>
                       <select class="custom-select form-control-border selectAbbr2" id="cari_bank" name="cari_bank">
-                        <option value="" selected></option>
-                        <?php foreach ($banks as $bank) : ?>
-                          <option value="<?= $bank->initial ?>"><?= $bank->initial ?></option>
-                        <?php endforeach; ?>
                       </select>
                     </div>
                   </div>
@@ -50,7 +50,7 @@
                     <div class="form-group" style='margin-bottom: 0'>
                       <label for="status">Status</label>
                       <select class="custom-select form-control-border" name="cari_status">
-                        <option value="" selected>Silahkan Pilih</option>
+                        <option value="" selected>Pilih..</option>
                         <option value="1">Active</option>
                         <option value="0">In-Active</option>
                       </select>
@@ -91,7 +91,7 @@
                       <td><?php echo $pic->email ?></td>
                       <td><?php echo $pic->bank_code ?></td>
                       <td><?php echo $status = $pic->flag ? 'Active' : 'In-Active'; ?></td>
-                      <td><?php echo  date("d-M-Y", strtotime($pic->created_at));?></td>
+                      <td><?php echo  date("d-M-Y", strtotime($pic->created_at)); ?></td>
                       <td><button type="button" class="btn btn-primary detailPic" data-toggle="modal" data-target="#editModal" id="<?= $pic->id ?>">Ubah</button></td>
                     </tr>
                   <?php
@@ -125,7 +125,7 @@
           <?php $attributes = array('id' => 'editPIC'); ?>
 
           <?php echo form_open('pic/store', $attributes); ?>
-          <input type="hidden" name="id" id="id1"> 
+          <input type="hidden" name="id" id="id1">
           <div class="card-body">
             <div class="form-group">
               <label for="name">Nama</label>
@@ -164,14 +164,22 @@
 </div>
 <script>
   $(document).ready(function() {
-    $('.selectAbbr2').select2({
-      placeholder: "Silahkan Pilih",
-      width: '100%'
-    });
+
+    callAjaxUser($('.selectAbbr2'), '<?= base_url('pic/get_bankcode') ?>', 0);
+
+
+    $('.selectAbbr2').change(function() {
+      callAjaxUser($('.selectAbbr2'), '<?= base_url('pic/get_bankcode') ?>', 0);
+    })
+
+    // $('.selectAbbr2').select2({
+    //   placeholder: "Silahkan Pilih",
+    //   width: '100%'
+    // });
 
     $('.selectAbbr').select2({
       dropdownParent: $('#editModal'),
-      placeholder: "Silahkan Pilih",
+      placeholder: "Pilih..",
       width: '100%'
     });
 
@@ -207,7 +215,7 @@
           $('#status1').val(data.flag);
           $('#abbr1').select2({
             dropdownParent: $('#editModal'),
-            placeholder: "Silahkan Pilih",
+            placeholder: "Pilih..",
             width: '100%'
           }).trigger('change');
           $('#status').val(data.flag);
@@ -221,7 +229,7 @@
       let name = $('#name1').val();
       let email = $('#email1').val();
       let abbr = $('#abbr1').val();
-      let status = $('#status1').val(); 
+      let status = $('#status1').val();
 
       $.ajax({
         type: "POST",
@@ -264,7 +272,7 @@
               timer: 1500,
             });
 
-            setTimeout(function(){
+            setTimeout(function() {
               window.location.reload(1);
             }, 1500);
           }

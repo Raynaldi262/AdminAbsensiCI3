@@ -3,6 +3,9 @@
         color: red;
     }
 </style>
+<?php
+echo $js;
+?>
 <div class="breadcrumb" id="tambah_pic"></div>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -39,10 +42,8 @@
                     <div class="form-group">
                         <label for="abbr">Kode Bank</label>
                         <select class="custom-select form-control-border selectAbbr" id="abbr" name="abbr">
-                            <?php foreach ($banks as $bank) : ?>
-                                <option value="<?= $bank->initial ?>"><?= $bank->initial ?></option>
-                            <?php endforeach; ?>
                         </select>
+                        <?php echo form_error('abbr'); ?>
                     </div>
                 </div>
                 <!-- /.card-body -->
@@ -58,10 +59,17 @@
 
 <script>
     $(document).ready(function() {
-        $('.selectAbbr').select2({
-            placeholder: "Silahkan Pilih",
-            width: '100%'
-        });
+        callAjaxUser($('.selectAbbr'), '<?= base_url('pic/get_bankcode') ?>', 0);
+
+
+        $('.selectAbbr').change(function() {
+            callAjaxUser($('.selectAbbr'), '<?= base_url('pic/get_bankcode') ?>', 0);
+        })
+
+        // $('.selectAbbr').select2({
+        //     placeholder: "Silahkan Pilih",
+        //     width: '100%'
+        // });
 
         let status = $('.sweeatAlert').attr('id');
 
