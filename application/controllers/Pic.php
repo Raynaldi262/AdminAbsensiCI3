@@ -16,12 +16,13 @@ class Pic extends CI_Controller
     {
         $data['banks'] = $this->bank_model->get_all_bankcode();
         $data['pics'] = $this->pic_model->get_pic_limited(50);
+        $data['title'] = 'Daftar PIC';
 
         $data['js'] = $this->load->view('include/js.php', NULL, TRUE);
-        $this->load->view('layout/header');
+        $this->load->view('layout/header', $data);
         $this->load->view('layout/navbar');
         $this->load->view('layout/sidebar');
-        $this->load->view('pic/index', $data);
+        $this->load->view('pic/index');
         $this->load->view('layout/footer');
     }
 
@@ -29,12 +30,13 @@ class Pic extends CI_Controller
     {
         $data['status'] = $this->uri->segment(3);
         $data['banks'] = $this->bank_model->get_all_bankcode();
+        $data['title'] = 'Tambahkan PIC';
 
         $data['js'] = $this->load->view('include/js.php', NULL, TRUE);
-        $this->load->view('layout/header');
+        $this->load->view('layout/header', $data);
         $this->load->view('layout/navbar');
         $this->load->view('layout/sidebar');
-        $this->load->view('pic/create', $data);
+        $this->load->view('pic/create');
         $this->load->view('layout/footer');
     }
 
