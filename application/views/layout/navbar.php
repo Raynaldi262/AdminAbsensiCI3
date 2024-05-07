@@ -9,7 +9,7 @@
       <a href="<?= base_url("/dashboard/index") ?>" class="nav-link">Dashboard</a>
     </li>
     <li class="nav-item d-none d-sm-inline-block">
-      <a href="#" class="nav-link">Keluar</a>
+      <a href="<?= base_url("/login/logout") ?>" class="nav-link">Keluar</a>
     </li>
   </ul>
 </nav>
