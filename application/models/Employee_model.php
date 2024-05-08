@@ -50,4 +50,16 @@ class Employee_model extends CI_Model
         $this->db->where('id', $this->input->post('id'));
         $this->db->delete('employee');
     }
+
+    public function insert(): int
+    {
+        $data = array(
+            'name' =>  $this->input->post('name'),
+            'address' =>  $this->input->post('address'),
+            'phone' =>  $this->input->post('phone'),
+        );
+
+        $this->db->insert('employee', $data);
+        return $this->db->insert_id();
+    }
 }

@@ -36,6 +36,56 @@ class Employee extends CI_Controller
         $this->load->view('layout/footer');
     }
 
+    public function create()
+    {
+        $data['status'] = $this->uri->segment(3);
+        $data['title'] = 'Tambahkan Employee';
+
+        $data['js'] = $this->load->view('include/js.php', NULL, TRUE);
+        $this->load->view('layout/header', $data);
+        $this->load->view('layout/navbar');
+        $this->load->view('layout/sidebar');
+        $this->load->view('employee/create');
+        $this->load->view('layout/footer');
+    }
+
+
+    public function store()
+    {
+        $config = array(
+            array(
+                'field' => 'name',
+                'label' => 'Nama',
+                'rules' => 'required|is_unique[employee.name]'
+            ),
+            array(
+                'field' => 'address',
+                'label' => 'Address',
+                'rules' => 'required',
+            ),
+            array(
+                'field' => 'phone',
+                'label' => 'Phone',
+                'rules' => 'required',
+            ),
+        );
+
+        $this->form_validation->set_rules($config);
+
+        if ($this->form_validation->run() == TRUE) {
+            $id = $this->employee_model->insert();
+            if ($id) {
+                redirect(base_url() . 'employee/create/success');
+            } else {
+                log_message('error', $this->db->error());
+                redirect(base_url() . 'employee/create/error');
+            }
+        } else {
+            $this->create();    // klo gak lulus validasi
+        }
+    }
+
+
     public function show()
     {
         if ($this->input->is_ajax_request()) {
