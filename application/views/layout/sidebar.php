@@ -61,37 +61,37 @@
             </p>
           </a>
         </li>
-        <!-- <li class="nav-item menu-open">
-          <a href="#" class="nav-link" id="pic">
+        <li class="nav-item menu-open">
+          <a href="#" class="nav-link" id="employee">
             <i class="nav-icon fas fa fa-user-plus"></i>
             <p>
-              PIC
+              Employee
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
           <ul class="nav nav-treeview">
-            <li class="nav-item" id="pic">
-              <a href="<?php echo base_url() ?>pic/index" class="nav-link" id="daftar_pic">
+            <li class="nav-item" id="employee">
+              <a href="<?php echo base_url() ?>employee/index" class="nav-link" id="daftar_employee">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Daftar PIC</p>
+                <p>Employee</p>
               </a>
             </li>
-            <li class="nav-item" id="pic">
-              <a href="<?php echo base_url() ?>pic/insert" class="nav-link" id="tambah_pic">
+            <li class="nav-item" id="employee">
+              <a href="<?php echo base_url() ?>employee/create" class="nav-link" id="tambah_employee">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Tambahkan PIC</p>
+                <p>Create Employee</p>
               </a>
             </li>
           </ul>
         </li>
         <li class="nav-item menu-open">
-          <a href="<?= base_url("email/index"); ?>" class="nav-link" id="email">
+          <a href="<?= base_url("absen/index"); ?>" class="nav-link" id="Absen">
             <i class="nav-icon fas fa-envelope"></i>
             <p>
-              Email
+              Absen
             </p>
           </a>
-        </li> -->
+        </li>
       </ul>
     </nav>
     <!-- /.sidebar-menu -->
