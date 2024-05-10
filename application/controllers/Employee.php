@@ -68,6 +68,16 @@ class Employee extends CI_Controller
                 'label' => 'Phone',
                 'rules' => 'required',
             ),
+            array(
+                'field' => 'username',
+                'label' => 'Username',
+                'rules' => 'required',
+            ),
+            array(
+                'field' => 'password',
+                'label' => 'Password',
+                'rules' => 'required',
+            ),
         );
 
         $this->form_validation->set_rules($config);

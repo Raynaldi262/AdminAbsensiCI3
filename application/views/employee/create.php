@@ -35,6 +35,16 @@ echo $js;
                         <?php echo form_error('name'); ?>
                     </div>
                     <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control <?= (form_error('username')) ? 'is-invalid' : '' ?>" id="username" name="username" value="<?= set_value('username');  ?>" placeholder="Input username">
+                        <?php echo form_error('name'); ?>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control <?= (form_error('password')) ? 'is-invalid' : '' ?>" id="password" name="password" value="<?= set_value('password');  ?>" placeholder="Input password">
+                        <?php echo form_error('name'); ?>
+                    </div>
+                    <div class="form-group">
                         <label for="address">Address</label>
                         <input type="address" class="form-control <?= (form_error('address')) ? 'is-invalid' : '' ?>" id="address" name="address" value="<?= set_value('address');  ?>" placeholder="Input address">
                         <?php echo form_error('address'); ?>

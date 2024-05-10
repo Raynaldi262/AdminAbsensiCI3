@@ -29,8 +29,6 @@ class Employee_model extends CI_Model
         $this->db->where('id', $this->input->post('id'));
         $query  = $this->db->get();
         return $query->result_array()[0];
-
-        // return $query->row(0);
     }
 
     public function update_employee()
@@ -39,6 +37,7 @@ class Employee_model extends CI_Model
             'name' => $this->input->post('name'),
             'address' => $this->input->post('address'),
             'phone' => $this->input->post('phone'),
+            'username' => $this->input->post('username'),
             'isActive' => $this->input->post('status'),
         );
 
@@ -57,9 +56,23 @@ class Employee_model extends CI_Model
             'name' =>  $this->input->post('name'),
             'address' =>  $this->input->post('address'),
             'phone' =>  $this->input->post('phone'),
+            'username' => $this->input->post('username'),
+            'password' => $this->input->post('password'),
         );
 
         $this->db->insert('employee', $data);
         return $this->db->insert_id();
     }
+ 
+    public function login($usr, $pass){
+        $this->db->select('*');
+        $this->db->from('employee');
+        $this->db->where('username', $usr);
+        $this->db->where('password', $pass);
+        $query  = $this->db->get();
+
+        return $query->result();
+    }
 }
+
+

@@ -147,15 +147,30 @@ echo $js;
 <script>
   $(document).ready(function() {
 
-    $("#example1").DataTable({
-      "responsive": true,
-      "lengthChange": false,
-      "autoWidth": false,
-      "searching": false,
-      "ordering": true,
-      "paging": true,
-      "info": true,
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    $(function() {
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "searching": false,               
+                "autoWidth": false,
+                "scrollX": true,
+                "buttons": [{
+                        extend: "csv",
+                        messageTop: "Absensi",
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4],
+                        }
+                    }, 
+                    {
+                        extend: "pdf",
+                        messageTop: "Absensi",
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4],
+                        }
+                    }
+                ]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        });
 
 
     $(document).on("click", ".detailEmployee", function() {

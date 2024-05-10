@@ -67,6 +67,7 @@ echo $js;
                   <tr>
                     <th>No</th>
                     <th>Name</th>
+                    <th>Username</th>
                     <th>Address</th>
                     <th>Phone</th>
                     <th>Status</th>
@@ -80,6 +81,7 @@ echo $js;
                     <tr>
                       <td><?php echo $c ?></td>
                       <td><?php echo $data->name ?></td>
+                      <td><?php echo $data->username ?></td>
                       <td><?php echo $data->address ?></td>
                       <td><?php echo $data->phone ?></td>
                       <td><?php echo $status = $data->isActive ? 'Active' : 'In-Active'; ?></td>
@@ -124,6 +126,12 @@ echo $js;
               <label for="name">Nama</label>
               <input type="text" class="form-control" id="name1" name="name" placeholder="Input name">
               <div id="validationServerUsernameFeedback" class="invalid-feedback name1">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="name">Username</label>
+              <input type="text" class="form-control" id="username1" name="username" placeholder="Input username">
+              <div id="validationServerUsernameFeedback" class="invalid-feedback username1">
               </div>
             </div>
             <div class="form-group">
@@ -184,6 +192,7 @@ echo $js;
         success: function(data) {
           $('#id1').val(data.id);
           $('#name1').val(data.name);
+          $('#username1').val(data.username);
           $('#address1').val(data.address);
           $('#phone1').val(data.phone);
           $('#status1').val(data.isActive);
@@ -195,6 +204,7 @@ echo $js;
       e.preventDefault();
       let id = $('#id1').val();
       let name = $('#name1').val();
+      let username = $('#username1').val();
       let address = $('#address1').val();
       let phone = $('#phone1').val();
       let status = $('#status1').val();
@@ -204,6 +214,7 @@ echo $js;
         data: {
           id,
           name,
+          username, 
           address,
           phone,
           status
