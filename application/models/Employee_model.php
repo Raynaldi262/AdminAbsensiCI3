@@ -65,13 +65,24 @@ class Employee_model extends CI_Model
     }
  
     public function login($usr, $pass){
-        $this->db->select('*');
+        $this->db->select('id, address, phone, isFace, name, password');
         $this->db->from('employee');
         $this->db->where('username', $usr);
         $this->db->where('password', $pass);
+        $this->db->where('isActive', 1);
         $query  = $this->db->get();
 
-        return $query->result();
+        return $query->row();
+    }
+
+    public function user($id){
+        $this->db->select('id, address, phone, isFace, name, password');
+        $this->db->from('employee');
+        $this->db->where('id', $id);
+        $this->db->where('isActive', 1);
+        $query  = $this->db->get();
+        
+        return $query->row();
     }
 }
 

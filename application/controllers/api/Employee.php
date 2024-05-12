@@ -14,6 +14,7 @@ class Employee extends RestController {
     function __construct() {
         parent::__construct();
         $this->load->model('employee_model');
+        // log_message("error", var_dump ($this->post()));
     }
 
     //Menampilkan data kontak
@@ -34,6 +35,22 @@ class Employee extends RestController {
         
     }
 
+
+    function user_get() {
+        $id = $this->get('id');
+
+        $user = $this->employee_model->user($id);
+
+        if($user){
+            $this->response($user, 200);
+        }else{
+            $this->response( [
+                'status' => false,
+                'message' => 'No users were found'
+            ], 404 );
+        }
+        
+    }
 
     //Masukan function selanjutnya disini
 }
