@@ -52,6 +52,27 @@ class Employee extends RestController {
         
     }
 
-    //Masukan function selanjutnya disini
+    function update_post(){
+
+        $data = array(
+            'name' => $this->post('name'),
+            'address' => $this->post('address'),
+            'phone' => $this->post('phone'),
+            'password' => $this->post('password')
+        );
+        
+        $id = $this->post('id');
+        $update = $this->employee_model->update($data, $id);
+
+        if($update){
+            $this->response($login, 200);
+        }else{
+            $this->response( [
+                'status' => false,
+                'message' => 'No users were found'
+            ], 404 );
+        }
+    }
+
 }
 ?>
