@@ -91,6 +91,16 @@ class Employee_model extends CI_Model
         return $this->db->update('employee', $data);
     }
 
+    public function updateFace($id){
+
+        $data = array(
+            'isFace' =>  1
+        );
+        
+        $this->db->where('id', $id);
+        return $this->db->update('employee', $data);
+        
+    }
 }
 
 

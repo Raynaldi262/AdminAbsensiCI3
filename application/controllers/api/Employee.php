@@ -74,5 +74,22 @@ class Employee extends RestController {
         }
     }
 
+
+    
+    function updateFace_get() {
+        $id = $this->get('id');
+
+        $user = $this->employee_model->updateFace($id);
+
+        if($user){
+            $this->response($user, 200);
+        }else{
+            $this->response( [
+                'status' => false,
+                'message' => 'No users were found'
+            ], 404 );
+        }
+        
+    }
 }
 ?>
