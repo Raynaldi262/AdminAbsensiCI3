@@ -92,6 +92,14 @@
             </p>
           </a>
         </li>
+        <li class="nav-item menu-open">
+          <a href="<?= base_url("map"); ?>" class="nav-link" id="Map">
+            <i class="nav-icon fas fa-map"></i>
+            <p>
+              GPS
+            </p>
+          </a>
+        </li>
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

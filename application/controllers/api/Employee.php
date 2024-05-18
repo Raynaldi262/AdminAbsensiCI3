@@ -14,6 +14,7 @@ class Employee extends RestController {
     function __construct() {
         parent::__construct();
         $this->load->model('employee_model');
+        $this->load->model('absen_model');
         // log_message("error", var_dump ($this->post()));
     }
 
