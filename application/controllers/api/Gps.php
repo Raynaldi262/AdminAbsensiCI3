@@ -21,7 +21,12 @@ class Gps extends RestController {
         $gps = $this->gps_model->get_all();
 
         if($gps){
-            $this->response($gps, 200);
+            $this->response( [
+                'id' => $gps->id,
+                'lat' => $gps->lat,
+                'lon' =>  $gps->long
+            ], 200 );
+
         }else{
             $this->response( [
                 'status' => false,

@@ -74,7 +74,7 @@ echo $js;
             Swal.fire({
                 position: "center",
                 icon: "success",
-                title: "Employee Created",
+                title: "Cordinate Saved",
                 showConfirmButton: false,
                 timer: 1500,
             });
