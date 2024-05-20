@@ -14,8 +14,9 @@ class Absen_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('absen');
-        $this->db->join('employee', 'employee.id = absen.employeeId');
         $this->db->where('employeeid', $id);
+        $this->db->order_by('id', 'DESC');
+
         $query = $this->db->get();
         return $query->result();
     }
