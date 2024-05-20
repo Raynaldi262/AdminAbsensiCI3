@@ -17,6 +17,19 @@ class Absen extends RestController {
         // log_message("error", var_dump ($this->post()));
     }
 
+    function getData_get(){
+        $id = $this->get('id');
+        $absen = $this->absen_model->get_all_byId($id);
+        if($absen){
+            $this->response($absen, 200);
+        }else{
+            $this->response( [
+                'status' => false,
+                'message' => 'Absensi Gagal'
+            ], 404 );
+        }
+    }
+
     function absenIn_get(){
         $id = $this->get('id');
         $dateNow = date("Y-m-d");

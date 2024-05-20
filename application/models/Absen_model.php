@@ -10,6 +10,16 @@ class Absen_model extends CI_Model
         return $query->result();
     }
 
+    public function get_all_byId($id): array
+    {
+        $this->db->select('*');
+        $this->db->from('absen');
+        $this->db->join('employee', 'employee.id = absen.employeeId');
+        $this->db->where('employeeid', $id);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
     public function search($name, $date): array
     {
         $this->db->select('*');
