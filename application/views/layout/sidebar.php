@@ -85,7 +85,7 @@
           </ul>
         </li>
         <li class="nav-item menu-open">
-          <a href="<?= base_url("absen/index"); ?>" class="nav-link" id="Absen">
+          <a href="<?= base_url("absen/index"); ?>" class="nav-link" id="absen">
             <i class="nav-icon fas fa-envelope"></i>
             <p>
               Absen
@@ -93,7 +93,7 @@
           </a>
         </li>
         <li class="nav-item menu-open">
-          <a href="<?= base_url("map"); ?>" class="nav-link" id="Map">
+          <a href="<?= base_url("map"); ?>" class="nav-link" id="map">
             <i class="nav-icon fas fa-map"></i>
             <p>
               GPS

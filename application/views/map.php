@@ -11,7 +11,7 @@ echo $js;
     margin: 10px;
   }
 </style>
-<div class="breadcrumb" id="daftar_pic"></div>
+<div class="breadcrumb" id="map"></div>
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
  <div class="sweeatAlert" id="<?= $status; ?>"></div>

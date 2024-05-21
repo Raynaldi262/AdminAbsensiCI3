@@ -11,7 +11,7 @@ echo $js;
     margin: 10px;
   }
 </style>
-<div class="breadcrumb" id="daftar_pic"></div>
+<div class="breadcrumb" id="absen"></div>
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
