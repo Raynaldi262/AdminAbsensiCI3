@@ -70,7 +70,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | The $query_builder variables lets you determine whether or not to load
 | the query builder class.
 */
-$active_group = 'default';
+$active_group = 'dev';
 $query_builder = TRUE;
 
 $db['default'] = array(
@@ -79,6 +79,28 @@ $db['default'] = array(
 	'username' => 'root',
 	'password' => '',
 	'database' => 'absensi',
+	'dbdriver' => 'mysqli',
+	'dbprefix' => '',
+	'pconnect' => FALSE,
+	'db_debug' => (ENVIRONMENT !== 'production'),
+	'cache_on' => FALSE,
+	'cachedir' => '',
+	'char_set' => 'utf8',
+	'dbcollat' => 'utf8_general_ci',
+	'swap_pre' => '',
+	'encrypt' => FALSE,
+	'compress' => FALSE,
+	'stricton' => FALSE,
+	'failover' => array(),
+	'save_queries' => TRUE
+);
+
+$db['dev'] = array(
+	'dsn'	=> '',
+	'hostname' => '103.58.102.52',
+	'username' => 'wwwabsen1_root',
+	'password' => 'Monik123!@#',
+	'database' => 'wwwabsensi1_absensi',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
