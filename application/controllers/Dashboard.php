@@ -10,11 +10,15 @@ class Dashboard extends CI_Controller
 		if(!$this->auth_model->current_user()){
 			redirect('login');
 		}
+        $this->load->model('employee_model');
+        $this->load->model('gps_model');
 	}
 
 	public function index()
 	{
 		$data['title'] = 'Dashboard';
+		$data['rows'] = $this->employee_model->get_rows();
+        $data['gps'] = $this->gps_model->get_all();
 
 		$this->load->view('layout/header', $data);
 		$this->load->view('layout/navbar');

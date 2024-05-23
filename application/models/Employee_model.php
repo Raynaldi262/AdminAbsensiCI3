@@ -7,6 +7,12 @@ class Employee_model extends CI_Model
         return $query->result();
     }
 
+    public function get_rows(): int
+    {
+        $query = $this->db->get('employee');
+        return $query->num_rows();;
+    }
+
     public function searchByName(): array
     {
         $this->db->select('*');
