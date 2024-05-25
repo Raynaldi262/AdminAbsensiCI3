@@ -153,9 +153,10 @@ echo $js;
 
     $(function() {
             $("#example1").DataTable({
-                "lengthChange": false,
-                "searching": false,         
-                "scrollX": true,
+              "lengthChange": false,
+              "searching": false,
+              "ordering": true,
+              "scrollX": true,
                 "buttons": [{
                         extend: "csv",
                         messageTop: "Absensi",
