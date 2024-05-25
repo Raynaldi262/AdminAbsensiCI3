@@ -153,10 +153,8 @@ echo $js;
 
     $(function() {
             $("#example1").DataTable({
-                "responsive": true,
                 "lengthChange": false,
-                "searching": false,               
-                "autoWidth": false,
+                "searching": false,         
                 "scrollX": true,
                 "buttons": [{
                         extend: "csv",
