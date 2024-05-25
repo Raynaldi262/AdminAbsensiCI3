@@ -10,6 +10,10 @@ echo $js;
   .card-block {
     margin: 10px;
   }
+  div.dt-container {
+        width: 800px;
+        margin: 0 auto;
+    }
 </style>
 <div class="breadcrumb" id="absen"></div>
 <div class="content-wrapper">
@@ -152,7 +156,7 @@ echo $js;
                 "responsive": true,
                 "lengthChange": false,
                 "searching": false,               
-                "autoWidth": true,
+                "autoWidth": false,
                 "scrollX": true,
                 "buttons": [{
                         extend: "csv",

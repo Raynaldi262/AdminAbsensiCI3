@@ -10,6 +10,10 @@ echo $js;
   .card-block {
     margin: 10px;
   }
+  div.dt-container {
+        width: 800px;
+        margin: 0 auto;
+    }
 </style>
 <div class="breadcrumb" id="daftar_employee"></div>
 <div class="content-wrapper">
