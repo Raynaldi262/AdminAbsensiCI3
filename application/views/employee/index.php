@@ -171,7 +171,8 @@ echo $js;
     $("#example1").DataTable({
       "lengthChange": false,
       "searching": false,
-      "ordering": true,
+      "ordering": true,              
+      "autoWidth": false,
       "scrollX": true,
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
