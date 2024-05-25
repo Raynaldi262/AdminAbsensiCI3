@@ -172,7 +172,7 @@ echo $js;
       "lengthChange": false,
       "searching": false,
       "ordering": true,              
-      "autoWidth": true,
+      "autoWidth": false,
       "scrollX": true,
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 

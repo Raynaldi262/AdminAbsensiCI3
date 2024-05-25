@@ -154,7 +154,8 @@ echo $js;
     $(function() {
             $("#example1").DataTable({
               "lengthChange": false,
-              "searching": false,
+              "searching": false,  
+              "autoWidth": false,
               "ordering": true,
               "scrollX": true,
                 "buttons": [{
