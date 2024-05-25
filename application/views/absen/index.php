@@ -152,7 +152,7 @@ echo $js;
                 "responsive": true,
                 "lengthChange": false,
                 "searching": false,               
-                "autoWidth": false,
+                "autoWidth": true,
                 "scrollX": true,
                 "buttons": [{
                         extend: "csv",
