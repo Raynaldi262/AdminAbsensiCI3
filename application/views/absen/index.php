@@ -68,7 +68,9 @@ echo $js;
                     <th>No</th>
                     <th>Name</th>
                     <th>Date</th>
+                    <th>Loc In</th>
                     <th>In Time</th>
+                    <th>Loc Out</th>
                     <th>Out Time</th>
                   </tr>
                 </thead>
@@ -80,7 +82,9 @@ echo $js;
                       <td><?php echo $c ?></td>
                       <td><?php echo $data->name ?></td>
                       <td><?php echo date("d-M-Y", strtotime($data->date))?></td>
+                      <td><?php echo $data->locIn ?></td>
                       <td><?php echo $data->inTime ?></td>
+                      <td><?php echo $data->locOut ?></td>
                       <td><?php echo $data->outTime ?></td>
                     </tr>
                   <?php
@@ -101,52 +105,6 @@ echo $js;
   </section>
   <!-- /.content -->
   <!-- Modal -->
-  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Edit Employee</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <?php $attributes = array('id' => 'editEmployee'); ?>
-          <?php echo form_open('employee/edit', $attributes); ?>
-          <input type="hidden" name="id" id="id1">
-          <div class="card-body">
-            <div class="form-group">
-              <label for="name">Nama</label>
-              <input type="text" class="form-control" id="name1" name="name" placeholder="Input name">
-              <div id="validationServerUsernameFeedback" class="invalid-feedback name1">
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="address">Address</label>
-              <input type="address" class="form-control" id="address1" name="address" placeholder="Input Address">
-              <div id="validationServerUsernameFeedback" class="invalid-feedback address1">
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="phone">Phone</label>
-              <input type="text" class="form-control" id="phone1" name="phone" placeholder="Input Phone">
-              <div id="validationServerUsernameFeedback" class="invalid-feedback phone1">
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="status">Status</label>
-              <select class="custom-select form-control-border" id="status1" name="status1">
-                <option value="1">Active</option>
-                <option value="0">In-Active</option>
-              </select>
-            </div>
-            <input type="submit" class="btn btn-success" value="Save Changes">
-          </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
 <script>
   $(document).ready(function() {
@@ -162,134 +120,18 @@ echo $js;
                         extend: "csv",
                         messageTop: "Absensi",
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4],
+                            columns: [0, 1, 2, 3, 4, 5, 6],
                         }
                     }, 
                     {
                         extend: "pdf",
                         messageTop: "Absensi",
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4],
+                            columns: [0, 1, 2, 3, 4, 5, 6],
                         }
                     }
                 ]
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
         });
-
-
-    $(document).on("click", ".detailEmployee", function() {
-      $('#name1').removeClass('is-invalid')
-      $('.name1').html('')
-      $('#address1').removeClass('is-invalid')
-      $('.address').html('')
-
-      var id = $(this).attr('id');
-      $.ajax({
-        url: "<?= base_url("employee/show") ?>",
-        type: "post",
-        dataType: 'json',
-        data: {
-          id
-        },
-        success: function(data) {
-          $('#id1').val(data.id);
-          $('#name1').val(data.name);
-          $('#address1').val(data.address);
-          $('#phone1').val(data.phone);
-          $('#status1').val(data.isActive);
-        }
-      });
-    });
-
-    $('#editEmployee').submit(function(e) {
-      e.preventDefault();
-      let id = $('#id1').val();
-      let name = $('#name1').val();
-      let address = $('#address1').val();
-      let phone = $('#phone1').val();
-      let status = $('#status1').val();
-
-      $.ajax({
-        type: "POST",
-        data: {
-          id,
-          name,
-          address,
-          phone,
-          status
-        },
-        url: "<?php echo base_url("employee/update"); ?>",
-        dataType: "json",
-        success: function(result) {
-          if (result.error) {
-            if (result.error.name) {
-              $('#name1').addClass('is-invalid')
-              $('.name1').html(result.error.name)
-            } else {
-              $('#name1').removeClass('is-invalid')
-              $('.name1').html('')
-            }
-            if (result.error.email) {
-              $('#address1').addClass('is-invalid')
-              $('.address1').html(result.error.address)
-            } else {
-              $('#address1').removeClass('is-invalid')
-              $('.address').html('')
-            }
-          } else {
-            $('#name1').removeClass('is-invalid')
-            $('.name1').html('')
-            $('#address1').removeClass('is-invalid')
-            $('.address1').html('')
-            $('#editModal').modal('toggle');
-            Swal.fire({
-              position: "center",
-              icon: "success",
-              title: "Employee Changed",
-              showConfirmButton: false,
-              timer: 1500,
-            });
-
-            setTimeout(function() {
-              window.location.reload(1);
-            }, 1500);
-          }
-
-        },
-        error: function(xhr, ajaxOptions, thrownError) {
-          alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
-        }
-      })
-    })
-
-
-    $(document).on("click", ".deleteEmployee", function() {
-      var id = $(this).attr('id');
-
-      $.ajax({
-        type: "POST",
-        data: {
-          id,
-        },
-        url: "<?php echo base_url("employee/delete"); ?>",
-        dataType: "json",
-        success: function(result) {
-            Swal.fire({
-              position: "center",
-              icon: "success",
-              title: "Employee deleted",
-              showConfirmButton: false,
-              timer: 1500,
-            });
-
-            setTimeout(function() {
-              window.location.reload(1);
-            }, 1500);
-        },
-        error: function(xhr, ajaxOptions, thrownError) {
-          alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
-        }
-      })
-  })
 })
 </script>
