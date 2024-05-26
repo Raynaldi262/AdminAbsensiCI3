@@ -85,7 +85,7 @@ echo $js;
                       <td><?php echo $data->locIn ?></td>
                       <td><?php echo $data->inTime ?></td>
                       <td><?php echo $data->locOut ?></td>
-                      <td><?php echo $data->outTime ?></td>
+                      <td><?php echo $data->outTime ?></td> 
                     </tr>
                   <?php
                     $c++;
