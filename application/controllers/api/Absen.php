@@ -32,14 +32,15 @@ class Absen extends RestController {
 
     function absenIn_get(){
         $id = $this->get('id');
+        $loc = $this->get('loc');
         $dateNow = date("Y-m-d");
         
         $absen = $this->absen_model->searchByEmployee($id, $dateNow);
         
         if($absen){
-            $absen = $this->absen_model->updateIn($absen->id);
+            $absen = $this->absen_model->updateIn($absen->id, $loc);
         }else{
-            $absen = $this->absen_model->insertAbsenIn($id, $dateNow);
+            $absen = $this->absen_model->insertAbsenIn($id, $dateNow, $loc);
         }
 
 
@@ -55,15 +56,15 @@ class Absen extends RestController {
 
     function absenOut_get(){
         $id = $this->get('id');
+        $loc = $this->get('loc');
         $dateNow = date("Y-m-d");
-        $absen = $this->absen_model->searchByEmployee($id, $dateNow);
+
+        $absen = $this->absen_model->searchByEmployee($id, $dateNow, $loc);
 
         if($absen){
-            echo "kosong";
-            $absen = $this->absen_model->updateOut($absen->id);
+            $absen = $this->absen_model->updateOut($absen->id, $loc);
         }else{
-            echo "isi";
-            $absen = $this->absen_model->insertAbsenOut($id, $dateNow);
+            $absen = $this->absen_model->insertAbsenOut($id, $dateNow, $loc);
         }
 
         if($absen){

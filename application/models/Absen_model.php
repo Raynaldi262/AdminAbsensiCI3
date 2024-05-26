@@ -58,10 +58,12 @@ class Absen_model extends CI_Model
         return $query->row();
     }
 
-    public function insertAbsenIn($id, $date){
+    public function insertAbsenIn($id, $date, $loc){
         $data = array(
             'employeeId' =>  $id,
             'date' =>  $date,
+            'locIn' =>  $loc,
+            'locOut' =>  "",
             'inTime' =>  date("H:i:s"),
             'outTime' => ''
         );
@@ -70,11 +72,13 @@ class Absen_model extends CI_Model
         return $this->db->insert_id();
     }
 
-    public function insertAbsenOut($id, $date){
+    public function insertAbsenOut($id, $date, $loc){
         $data = array(
             'employeeId' =>  $id,
             'date' =>  $date,
+            'locIn' =>  "",
             'inTime' => "",
+            'locOut' =>  $loc,
             'outTime' =>  date("H:i:s"),
         );
 
@@ -83,20 +87,22 @@ class Absen_model extends CI_Model
     }
 
 
-    public function updateIn($id){
+    public function updateIn($id, $loc){
 
         $data = array(
-            'inTime' =>  date("H:i:s")
+            'inTime' =>  date("H:i:s"),
+            'locIn' =>  $loc
         );
         
         $this->db->where('id', $id);
         return $this->db->update('absen', $data);
     }
 
-    public function updateOut($id){
+    public function updateOut($id, $loc){
 
         $data = array(
-            'outTime' =>  date("H:i:s")
+            'outTime' =>  date("H:i:s"),
+            'locOut' =>  $loc
         );
         
         $this->db->where('id', $id);
