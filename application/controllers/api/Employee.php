@@ -43,7 +43,20 @@ class Employee extends RestController {
         $user = $this->employee_model->user($id);
 
         if($user){
-            $this->response($user, 200);
+            $ava = empty($user->avatar) ? "profile.jpg" : $user->avatar;
+            $url = 'http://10.0.2.2:80/AdminAbsensiCI3/upload/'.$ava;
+            // $url = base_url().'/upload/'.$user->avatar;
+
+            $this->response( [
+                'id' => $user->id,
+                'address' => $user->address,
+                'phone' =>  $user->phone,
+                'isFace' => $user->isFace,
+                'name' =>  $user->name,
+                'password' => $user->password,
+                'avatar' =>  $url,
+            ], 200 );
+            
         }else{
             $this->response( [
                 'status' => false,

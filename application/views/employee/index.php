@@ -101,7 +101,7 @@ echo $js;
                       <td><?php echo $status = $data->isActive ? 'Active' : 'In-Active'; ?></td>
                       <td>
                         <button type="button" class="btn btn-primary detailEmployee" data-toggle="modal" data-target="#editModal" id="<?= $data->id ?>">Edit</button>
-                        <button type="button" class="btn btn-danger deleteEmployee" id="<?= $data->id ?>">Delete</button>
+                        <button type="button" class="btn btn-danger deleteEmployee" id="<?= $data->id ?>" value="<?= $data->avatar ?>">Delete</button>
                       </td>
                     </tr>
                   <?php
@@ -150,31 +150,31 @@ echo $js;
 
             <div class="form-group">
               <label for="name">Nama</label>
-              <input type="text" class="form-control" id="name1" name="name" placeholder="Input name">
+              <input type="text" class="form-control" id="name1" name="name" placeholder="Input name" required>
               <div id="validationServerUsernameFeedback" class="invalid-feedback name1">
               </div>
             </div>
             <div class="form-group">
               <label for="name">Username</label>
-              <input type="text" class="form-control" id="username1" name="username" placeholder="Input username">
+              <input type="text" class="form-control" id="username1" name="username" placeholder="Input username" required>
               <div id="validationServerUsernameFeedback" class="invalid-feedback username1">
               </div>
             </div>
             <div class="form-group">
               <label for="address">Address</label>
-              <input type="address" class="form-control" id="address1" name="address" placeholder="Input Address">
+              <input type="address" class="form-control" id="address1" name="address" placeholder="Input Address" required>
               <div id="validationServerUsernameFeedback" class="invalid-feedback address1">
               </div>
             </div>
             <div class="form-group">
               <label for="phone">Phone</label>
-              <input type="text" class="form-control" id="phone1" name="phone" placeholder="Input Phone">
+              <input type="text" class="form-control" id="phone1" name="phone" placeholder="Input Phone" required>
               <div id="validationServerUsernameFeedback" class="invalid-feedback phone1">
               </div>
             </div>
             <div class="form-group">
               <label for="status">Status</label>
-              <select class="custom-select form-control-border" id="status1" name="status1">
+              <select class="custom-select form-control-border" id="status1" name="status1" required>
                 <option value="1">Active</option>
                 <option value="0">In-Active</option>
               </select>
@@ -233,21 +233,25 @@ echo $js;
       let address = $('#address1').val();
       let phone = $('#phone1').val();
       let status = $('#status1').val();
-      let avatar = $('#avatar').val();
       let avatarId = $('#avatarId1').val();
+
+      var fd = new FormData();
+      var files = $('#avatar')[0].files[0];
+
+      fd.append('id',id);
+      fd.append('avatar',files);
+      fd.append('name',name);
+      fd.append('username',username);
+      fd.append('address',address);
+      fd.append('phone',phone);
+      fd.append('status',status);
+      fd.append('avatarId',avatarId);
 
       $.ajax({
         type: "POST",
-        data: {
-          id,
-          name,
-          username, 
-          address,
-          phone,
-          status,
-          avatar,
-          avatarId
-        },
+        data: fd,
+        processData: false,
+        contentType: false,
         url: "<?php echo base_url("employee/update"); ?>",
         dataType: "json",
         success: function(result) {
@@ -295,11 +299,14 @@ echo $js;
 
     $(document).on("click", ".deleteEmployee", function() {
       var id = $(this).attr('id');
+      var avatar = $(this).val();
 
+      console.log(avatar);
       $.ajax({
         type: "POST",
         data: {
           id,
+          avatar
         },
         url: "<?php echo base_url("employee/delete"); ?>",
         dataType: "json",

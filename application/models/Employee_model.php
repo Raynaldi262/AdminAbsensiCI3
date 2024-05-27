@@ -84,7 +84,7 @@ class Employee_model extends CI_Model
     }
 
     public function user($id){
-        $this->db->select('id, address, phone, isFace, name, password');
+        $this->db->select('id, address, phone, isFace, name, password,avatar');
         $this->db->from('employee');
         $this->db->where('id', $id);
         $this->db->where('isActive', 1);
