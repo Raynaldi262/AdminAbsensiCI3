@@ -70,6 +70,7 @@ echo $js;
                 <thead>
                   <tr>
                     <th>No</th>
+                    <th>Picture</th>
                     <th>Name</th>
                     <th>Username</th>
                     <th>Address</th>
@@ -84,6 +85,15 @@ echo $js;
                   foreach ($employee as $data) : ?>
                     <tr>
                       <td><?php echo $c ?></td>
+                      <td>
+                      <?php
+                      $avatar = $data->avatar ?
+                        base_url('/upload/'. $data->avatar)
+                        : base_url('/assets/dist/img/profile.jpg') 
+                      ?>
+                      <img src="<?= $avatar ?>" height="32" width="32">
+
+                      </td>
                       <td><?php echo $data->name ?></td>
                       <td><?php echo $data->username ?></td>
                       <td><?php echo $data->address ?></td>
@@ -123,9 +133,21 @@ echo $js;
         </div>
         <div class="modal-body">
           <?php $attributes = array('id' => 'editEmployee'); ?>
-          <?php echo form_open('employee/edit', $attributes); ?>
+          <?php echo form_open_multipart('employee/edit', $attributes); ?>
           <input type="hidden" name="id" id="id1">
+          <input type="hidden" name="avatarId" id="avatarId1">
           <div class="card-body">
+            
+          <div class="form-group">
+                        <label for="name">Avatar</label>
+                        <input type="file" class="form-control" name="avatar" id="avatar" accept="image/png, image/jpeg, image/jpg" required>
+                      
+                        <?php if (isset($error)) : ?>
+                            <div class="invalid-feedback"><?= $error ?></div>
+                        <?php endif; ?>
+
+            </div>
+
             <div class="form-group">
               <label for="name">Nama</label>
               <input type="text" class="form-control" id="name1" name="name" placeholder="Input name">
@@ -198,6 +220,7 @@ echo $js;
           $('#address1').val(data.address);
           $('#phone1').val(data.phone);
           $('#status1').val(data.isActive);
+          $('#avatarId1').val(data.avatar);
         }
       });
     });
@@ -210,6 +233,8 @@ echo $js;
       let address = $('#address1').val();
       let phone = $('#phone1').val();
       let status = $('#status1').val();
+      let avatar = $('#avatar').val();
+      let avatarId = $('#avatarId1').val();
 
       $.ajax({
         type: "POST",
@@ -219,7 +244,9 @@ echo $js;
           username, 
           address,
           phone,
-          status
+          status,
+          avatar,
+          avatarId
         },
         url: "<?php echo base_url("employee/update"); ?>",
         dataType: "json",

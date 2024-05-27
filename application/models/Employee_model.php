@@ -37,7 +37,7 @@ class Employee_model extends CI_Model
         return $query->result_array()[0];
     }
 
-    public function update_employee()
+    public function update_employee($avatar)
     {
         $data = array(
             'name' => $this->input->post('name'),
@@ -45,6 +45,7 @@ class Employee_model extends CI_Model
             'phone' => $this->input->post('phone'),
             'username' => $this->input->post('username'),
             'isActive' => $this->input->post('status'),
+            'avatar' => $avatar,
         );
 
         $this->db->where('id', $this->input->post('id'));
@@ -56,7 +57,7 @@ class Employee_model extends CI_Model
         $this->db->delete('employee');
     }
 
-    public function insert(): int
+    public function insert($avatar): int
     {
         $data = array(
             'name' =>  $this->input->post('name'),
@@ -64,6 +65,7 @@ class Employee_model extends CI_Model
             'phone' =>  $this->input->post('phone'),
             'username' => $this->input->post('username'),
             'password' => $this->input->post('password'),
+            'avatar' => $avatar,
         );
 
         $this->db->insert('employee', $data);

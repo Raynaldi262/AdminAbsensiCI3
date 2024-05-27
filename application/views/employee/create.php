@@ -27,8 +27,17 @@ echo $js;
                 </div>
                 <div class="sweeatAlert" id="<?= $status; ?>"></div>
                 <?php $hidden = array('created_at' => date('Y-m-d H:i:s'), 'modified_at' => date('Y-m-d H:i:s'), 'flag' => 1); ?>
-                <?php echo form_open('employee/store', '', $hidden); ?>
+                <?php echo form_open_multipart('employee/store', '', $hidden); ?>
                 <div class="card-body">
+                    <div class="form-group">
+                        <label for="name">Avatar</label>
+                        <input type="file" class="form-control" name="avatar" id="avatar" accept="image/png, image/jpeg, image/jpg" required>
+                        
+                        <?php if (isset($error)) : ?>
+                            <div class="invalid-feedback"><?= $error ?></div>
+                        <?php endif; ?>
+
+                    </div>
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" class="form-control <?= (form_error('name')) ? 'is-invalid' : '' ?>" id="name" name="name" value="<?= set_value('name');  ?>" placeholder="Input name">
@@ -37,12 +46,12 @@ echo $js;
                     <div class="form-group">
                         <label for="username">Username</label>
                         <input type="text" class="form-control <?= (form_error('username')) ? 'is-invalid' : '' ?>" id="username" name="username" value="<?= set_value('username');  ?>" placeholder="Input username">
-                        <?php echo form_error('name'); ?>
+                        <?php echo form_error('username'); ?>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" class="form-control <?= (form_error('password')) ? 'is-invalid' : '' ?>" id="password" name="password" value="<?= set_value('password');  ?>" placeholder="Input password">
-                        <?php echo form_error('name'); ?>
+                        <?php echo form_error('password'); ?>
                     </div>
                     <div class="form-group">
                         <label for="address">Address</label>
