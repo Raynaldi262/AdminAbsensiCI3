@@ -90,9 +90,9 @@ class Employee extends CI_Controller
             $config['allowed_types']        = 'jpg|jpeg|png';
             $config['file_name']            = $t;
             $config['overwrite']            = true;
-            $config['max_size']             = 2048; // 1MB
-            $config['max_width']            = 2080;
-            $config['max_height']           = 2080;
+            $config['max_size']             = 4048; // 1MB
+            $config['max_width']            = 4080;
+            $config['max_height']           = 4080;
 
             $this->load->library('upload', $config);
             
@@ -154,9 +154,9 @@ class Employee extends CI_Controller
                 $config['allowed_types']        = 'jpg|jpeg|png';
                 $config['file_name']            = $t;
                 $config['overwrite']            = true;
-                $config['max_size']             = 2048; // 1MB
-                $config['max_width']            = 2080;
-                $config['max_height']           = 2080;
+                $config['max_size']             = 4048; // 1MB
+                $config['max_width']            = 4080;
+                $config['max_height']           = 4080;
                 
                 $this->load->library('upload', $config);
                 
