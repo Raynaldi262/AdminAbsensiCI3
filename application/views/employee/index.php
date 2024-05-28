@@ -76,7 +76,8 @@ echo $js;
                     <th>Address</th>
                     <th>Phone</th>
                     <th>Status</th>
-                    <th></th>
+                    <th>Face</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -99,6 +100,7 @@ echo $js;
                       <td><?php echo $data->address ?></td>
                       <td><?php echo $data->phone ?></td>
                       <td><?php echo $status = $data->isActive ? 'Active' : 'In-Active'; ?></td>
+                      <td><?php echo $data->isFace  ? 'True' : 'False'; ?></td>
                       <td>
                         <button type="button" class="btn btn-primary detailEmployee" data-toggle="modal" data-target="#editModal" id="<?= $data->id ?>">Edit</button>
                         <button type="button" class="btn btn-danger deleteEmployee" id="<?= $data->id ?>" value="<?= $data->avatar ?>">Delete</button>
@@ -140,7 +142,7 @@ echo $js;
             
           <div class="form-group">
                         <label for="name">Avatar</label>
-                        <input type="file" class="form-control" name="avatar" id="avatar" accept="image/png, image/jpeg, image/jpg" required>
+                        <input type="file" class="form-control" name="avatar" id="avatar" accept="image/png, image/jpeg, image/jpg">
                       
                         <?php if (isset($error)) : ?>
                             <div class="invalid-feedback"><?= $error ?></div>
@@ -179,6 +181,14 @@ echo $js;
                 <option value="0">In-Active</option>
               </select>
             </div>
+            <div class="form-group">
+              <label for="face">Face</label>
+              <select class="custom-select form-control-border" id="face1" name="face1" required>
+                <option value="1">True</option>
+                <option value="0">False</option>
+              </select>
+            </div>
+
             <input type="submit" class="btn btn-success" value="Save Changes">
           </div>
           </form>
@@ -221,6 +231,7 @@ echo $js;
           $('#phone1').val(data.phone);
           $('#status1').val(data.isActive);
           $('#avatarId1').val(data.avatar);
+          $('#face1').val(data.isFace);
         }
       });
     });
@@ -234,6 +245,7 @@ echo $js;
       let phone = $('#phone1').val();
       let status = $('#status1').val();
       let avatarId = $('#avatarId1').val();
+      let face = $('#face1').val();
 
       var fd = new FormData();
       var files = $('#avatar')[0].files[0];
@@ -246,6 +258,7 @@ echo $js;
       fd.append('phone',phone);
       fd.append('status',status);
       fd.append('avatarId',avatarId);
+      fd.append('isFace',face);
 
       $.ajax({
         type: "POST",

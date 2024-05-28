@@ -39,14 +39,27 @@ class Employee_model extends CI_Model
 
     public function update_employee($avatar)
     {
-        $data = array(
-            'name' => $this->input->post('name'),
-            'address' => $this->input->post('address'),
-            'phone' => $this->input->post('phone'),
-            'username' => $this->input->post('username'),
-            'isActive' => $this->input->post('status'),
-            'avatar' => $avatar,
-        );
+        $data;
+        if($avatar == ""){
+            $data = array(
+                'name' => $this->input->post('name'),
+                'address' => $this->input->post('address'),
+                'phone' => $this->input->post('phone'),
+                'username' => $this->input->post('username'),
+                'isActive' => $this->input->post('status'),
+                'isFace' => $this->input->post('isFace')
+            );
+        }else{
+            $data = array(
+                'name' => $this->input->post('name'),
+                'address' => $this->input->post('address'),
+                'phone' => $this->input->post('phone'),
+                'username' => $this->input->post('username'),
+                'isActive' => $this->input->post('status'),
+                'avatar' => $avatar,
+                'isFace' => $this->input->post('isFace')
+            );
+        }
 
         $this->db->where('id', $this->input->post('id'));
         $this->db->update('employee', $data);
