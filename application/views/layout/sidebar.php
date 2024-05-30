@@ -93,7 +93,6 @@
         </li>
         <li class="nav-item menu-open">
           <a href="<?= base_url("/login/logout") ?>" class="nav-link" id="logout">
-            <i class="nav-icon fas fa-map"></i>
             <p>
               Logout
             </p>
